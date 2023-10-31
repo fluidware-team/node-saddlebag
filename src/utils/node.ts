@@ -37,7 +37,11 @@ export const EnvParse = {
     return v;
   },
 
-  envString: function envString(key: string, def?: string): string | undefined {
+  envStringOptional: function envString(key: string): string | undefined {
+    return process.env[key];
+  },
+
+  envString: function envString(key: string, def: string): string {
     const v = process.env[key];
     if (v !== undefined) {
       return v;
