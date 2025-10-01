@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-import pino, { Logger, LoggerOptions, stdTimeFunctions } from 'pino';
+import type { Logger, LoggerOptions } from 'pino';
 import { Config } from './config';
 import { _globalThis } from './globalThis';
 import { getAsyncLocalStorageProp, StoreSymbols } from './utils/asyncStore';
+import * as pino from 'pino';
 
 const GLOBAL_FW_LOGGER_KEY = Symbol.for('fw.logger');
 
@@ -44,7 +45,7 @@ function setupLogger() {
     }
   };
   if (Config.Logger.isoTimestamp) {
-    logParams.timestamp = stdTimeFunctions.isoTime;
+    logParams.timestamp = pino.stdTimeFunctions.isoTime;
   }
   if (Config.Logger.useSeverityString) {
     logParams.formatters = {
