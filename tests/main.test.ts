@@ -14,8 +14,18 @@
  * limitations under the License.
  */
 
-describe('fake test', () => {
-  it('should be super smart', () => {
-    expect(true).toBe(true);
+
+import { getLogger } from '../src';
+
+describe('logger test', () => {
+  it('should not throw any error', () => {
+    const logger = getLogger();
+    logger.info('test message');
+    logger.info({ something: { id: 'test' } }, 'test message');
+    logger.info({ url: '/protected?access_token=do-not-show-me'}, 'test message');
+    logger.info({ url: '/protected?access_token=do-not-show-me', req: { authorization: 'bearer do-not-show-me' } }, 'test message');
+    logger.info({ req: { id: 'test' } }, 'test message');
+    logger.info({ a: {  c: 'should-not-show-me' } } , 'test message');
+    logger.info({ a: {  c: 'should-not-show-me' }, req: { id: 'test' } } , 'test message');
   });
 });
