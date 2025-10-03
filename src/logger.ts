@@ -35,6 +35,9 @@ function setupLogger() {
     redact: {
       paths: ['req.authorization', 'url', ...Config.Logger.redact],
       censor(value, path) {
+        if (typeof value !== 'string') {
+          return undefined;
+        }
         if (path[0] === 'url') {
           return value.replace(/access_token=[a-zA-Z0-9_-]*/, 'access_token=***');
         } else if (path[1] === 'authorization') {
