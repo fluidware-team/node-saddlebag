@@ -28,6 +28,9 @@ type FWGlobal = {
 
 const _global = _globalThis as unknown as FWGlobal;
 
+const accessTokenRegex = /access_token=[a-zA-Z0-9_-]*/g;
+const bearerTokenRegex = /\s+(\S+)$/;
+
 function setupLogger() {
   const logParams: LoggerOptions = {
     name: Config.Logger.name,
@@ -39,9 +42,10 @@ function setupLogger() {
           return undefined;
         }
         if (path[0] === 'url') {
-          return value.replace(/access_token=[a-zA-Z0-9_-]*/, 'access_token=***');
-        } else if (path[1] === 'authorization') {
-          return value.replace(/\s+(\S+)$/, ' ***');
+          return value.replace(accessTokenRegex, 'access_token=***');
+        }
+        if (path.length === 2 && path[0] === 'req' && path[1] === 'authorization') {
+          return value.replace(bearerTokenRegex, ' ***');
         }
         return '***';
       }
