@@ -33,7 +33,7 @@ function setupLogger() {
     name: Config.Logger.name,
     level: Config.Logger.level,
     redact: {
-      paths: ['req.authorization', 'url'],
+      paths: ['req.authorization', 'url', ...Config.Logger.redact],
       censor(value, path) {
         if (path[0] === 'url') {
           return value.replace(/access_token=[a-zA-Z0-9_-]*/, 'access_token=***');

@@ -21,6 +21,7 @@ export const Config = {
     level: EnvParse.envString('FW_LOGGER_LEVEL', 'info'),
     name: EnvParse.envString('FW_LOGGER_NAME', EnvParse.envString('npm_package_name', '@fluidware-it/saddlebag')),
     isoTimestamp: EnvParse.envBool('FW_LOGGER_ISO_TIMESTAMP', false),
-    useSeverityString: EnvParse.envBool('FW_LOGGER_SEVERITY_AS_STRING', false)
+    useSeverityString: EnvParse.envBool('FW_LOGGER_SEVERITY_AS_STRING', false),
+    redact: EnvParse.envStringList('FW_LOGGER_REDACT_KEYS', [])
   }
 };
