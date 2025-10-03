@@ -23,7 +23,7 @@
     "node": ">=18.4"
   },
   "dependencies": {
-    "pino": "^9.12.0"
+    "pino": "^10.0.0"
   },
   "devDependencies": {
     "@fluidware-it/env2doc": "^0.3.1",
